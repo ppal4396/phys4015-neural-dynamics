@@ -119,10 +119,19 @@ When the voltage-dependence of rate constants are known, the gating variables an
 
 A simpler alternative to producing spiking behaviour in single neurons (biophysics of voltage-gated channels are ignored). Membrane potential has a capacitance and leak term only; and is reset when it reaches spiking threshold.
 
-> [!todo]
-> hop through ch 2.3 integrate and fire models in Miller
+Following simplification of the circuit model (where ion-channel conductances are fixed/ignored), we model current through the membrane using leaky channel term plus externally applied current.
+$$I_m = C_m \frac{dV_m}{dt} = 
+G_L (E_L -V_m) + I_{app} \ ;
+\text{if } V_m > V_{thresh} \ \text{then }
+V_m \mapsto V_{reset}$$
+Without the conductance term, membrane potential would perfectly integrate the external current applied.
 
-### derivation of time between spikes in LIF models
+The steady state value for $V_m$ is found when $dV_m/dt = 0$.
+$$V_{ss} = \frac {I_{app}} {G_L} + E_L$$
+When $I_{app}$ is high enough, $V_{ss}$ reaches $V_{thresh}$. That is, this is the current needed to generate spikes and can be written as $I_{thresh}$, substituted into the above:
+$$I_{thresh} = G_L(V_{thresh} - E_L)$$
+
+### derivation of regular time between spikes in LIF models
 $$ \tau_m \frac{du}{dt} = - u(t) + RI(t) $$
 where
 - $\tau_m$ = membrane time constant
