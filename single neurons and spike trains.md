@@ -259,7 +259,7 @@ i.e., the chance that some non-negative number of spikes occurs in $T$ is certai
 
 We have
 
-$$\sum _{N=0} ^{\infty} P_T[N] = P_T[0] \sum_{N=0}^{\infty} \frac{(rT)^N} {N!} = 1$$
+$$\sum _{N=0} ^{\infty} P_T[N] = P_T[0]\sum_{N=0}^{\infty}\frac{(rT)^N}{N!} = 1$$
 
 Next, since exponential function $e^x$ is defined by
 $$e^x = \sum_{N=0} ^{\infty} \frac{x^N}{N!}$$
