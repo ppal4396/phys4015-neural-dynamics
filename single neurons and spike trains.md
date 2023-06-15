@@ -40,6 +40,7 @@ $$I_m = \sum_{A} G_A (V_m - E_A) = 0$$
 - $G_A$ is the channel's conductance, $E_A$ is its Nernst potential
 
 The resting membrane potential (in the above circuit where we have Na, Ca and K channels) is given by
+
 $$V_m = 
 \frac
 {G_{Na}E_{Na} + G_{Ca}E_{Ca} + G_{K}E_{K} + G_{L}E_{L}}
