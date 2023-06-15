@@ -95,13 +95,11 @@ Each gating variable has a voltage-dependent steady state value (would reach thi
 Four coupled differential equations are used to describe varying cell membrane potential. The exponents were derived via voltage-clamped experiments in squid axons.
 
 1. 
-
-$$C_m \frac {dV_m} {dt} = 
-  \bar{G}_K n^4 (V_m - E_K) + 
-  \bar{G}_{Na} m^3 h ( V_m - E_{Na} ) + 
-  \bar{G}_L \cdot (V_m - E_L) +
-  I_{app}$$
-  
+$$C_m \frac{dV_m}{dt} = 
+\bar{G}_K n^4 (V_m - E_K) + 
+\bar{G}_{Na} m^3 h ( V_m - E_{Na} ) + 
+\bar{G}_L \cdot (V_m - E_L) +
+I_{app}$$
 2. $$\frac {dn} {dt} = \alpha_n (1 - n) - \beta_n n$$
 3. $$\frac{dm}{dt} = \alpha_m (1 - m) - \beta_m m$$
 4. $$\frac{dh}{dt}= \alpha_h (1 - h) - \beta_h h$$
@@ -259,7 +257,7 @@ i.e., the chance that some non-negative number of spikes occurs in $T$ is certai
 
 We have
 
-$$\sum _{N=0} ^{\infty} P_T[N] = P_T[0]\sum_{N=0}^{\infty}\frac{(rT)^N}{N!} = 1$$
+$$\sum_{N=0}^{\infty} P_T[N] = P_T[0] \sum_{N=0}^{\infty} \frac{(rT)^N}{N!} = 1$$
 
 Next, since exponential function $e^x$ is defined by
 $$e^x = \sum_{N=0} ^{\infty} \frac{x^N}{N!}$$
