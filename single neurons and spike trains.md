@@ -94,7 +94,7 @@ Each gating variable has a voltage-dependent steady state value (would reach thi
 
 Four coupled differential equations are used to describe varying cell membrane potential. The exponents were derived via voltage-clamped experiments in squid axons.
 
-$$C_m \frac{dV_m}{dt} = {G}^{max}_K n^4 (V_m - E_K) + {G}^{max}_{Na} m^3 h (V_m - E_{Na}) + {G}^{max}_L \cdot (V_m - E_L) + I_{app}$$
+$$C_m \frac{dV_m}{dt} = {G}^{max}_K n^4 (V_m - E_K) + {G}^{max}_{Na} m^3 h (V_m - E_{Na}) + {G}^{max}_L (V_m - E_L) + I_{app}$$
 
 2. $$\frac {dn} {dt} = \alpha_n (1 - n) - \beta_n n$$
 3. $$\frac{dm}{dt} = \alpha_m (1 - m) - \beta_m m$$
