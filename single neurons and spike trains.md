@@ -53,9 +53,11 @@ $$Q = C_m V_m$$
 Rate of change in charge is given by current through the membrane.
 $$\frac{dQ}{dt} = - I_m = - G_L(V_m - E_L)$$
 Since capacitance is fixed over time, changing membrane potential is modelled inside (combine above two equations):
+
 $$C_m \frac{dV_m}{dt} 
 = G_L (E_L - V_m)$$
 Solving this to get $V_m$ as a function of time gives
+
 $$V_m(t) = E_L +
 \left [ V_0 - E_L \right ]
 \exp{(- t / \tau_m)}$$
@@ -90,14 +92,15 @@ Each gating variable has a voltage-dependent steady state value (would reach thi
 
 Four coupled differential equations are used to describe varying cell membrane potential. The exponents were derived via voltage-clamped experiments in squid axons.
 
-1. $$C_m \frac {dV_m} {dt} = 
+1. 
+$$C_m \frac {dV_m} {dt} = 
   \bar{G}_K n^4 (V_m - E_K) + 
   \bar{G}_{Na} m^3 h ( V_m - E_{Na} ) + 
   \bar{G}_L \cdot (V_m - E_L) +
   I_{app}$$
-1. $$\frac {dn} {dt} = \alpha_n (1 - n) - \beta_n n$$
-2. $$\frac{dm}{dt} = \alpha_m (1 - m) - \beta_m m$$
-3. $$\frac{dh}{dt}= \alpha_h (1 - h) - \beta_h h$$
+2. $$\frac {dn} {dt} = \alpha_n (1 - n) - \beta_n n$$
+3. $$\frac{dm}{dt} = \alpha_m (1 - m) - \beta_m m$$
+4. $$\frac{dh}{dt}= \alpha_h (1 - h) - \beta_h h$$
 where
 - $\bar{G}$ is maximal conductance
 - $n$ is a dimensionless probability in $[0, 1]$ of $K$ channel subunit activation
@@ -121,6 +124,7 @@ When the voltage-dependence of rate constants are known, the gating variables an
 A simpler alternative to producing spiking behaviour of single neurons (biophysics of voltage-gated channels are ignored). Membrane potential has a capacitance and leak term only; and is reset when it reaches spiking threshold.
 
 Following simplification of the circuit model (where ion-channel conductances are fixed/ignored), we model current through the membrane using leaky channel term plus externally applied current.
+
 $$I_m = C_m \frac{dV_m}{dt} = 
 G_L (E_L -V_m) + I_{app} \ ;
 \text{if } V_m > V_{thresh} \ \text{then }
@@ -140,8 +144,10 @@ where
 - $R$ = membrane resistance
 - $I$ = driving current through membrane
 
-Spikes are characterised by their firing time $$t^{(f)} : u(t^{(f)}) = u_{th}$$where $u_{th}$ is a firing threshold.
+Spikes are characterised by their firing time 
+$$t^{(f)} : u(t^{(f)}) = u_{th}$$where $u_{th}$ is a firing threshold.
 Immediately after $t^{(f)}$, the potential is reset, following
+
 $$\lim_{t \to t^{(f)} \space ; \space t > t^{(f)}} 
 u(t) = u_r$$
 where $u_r$ is the resting potential.
@@ -243,6 +249,7 @@ $$\sum _{N=0} ^{\infty} P_T[N] = 1$$
 i.e., the chance that some non-negative number of spikes occurs in $T$ is certain by our definition. Integrating the Poisson distribution between 0 and infinity should of course yield 1.
 
 We have
+
 $$\sum _{N=0} ^{\infty} P_T[N] = 
 P_T[0] \sum_{N=0}^{\infty} \frac{(rT)^N} {N!}
 = 1$$
