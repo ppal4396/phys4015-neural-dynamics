@@ -56,11 +56,13 @@ Since capacitance is fixed over time, changing membrane potential is modelled in
 
 $$C_m \frac{dV_m}{dt} 
 = G_L (E_L - V_m)$$
+
 Solving this to get $V_m$ as a function of time gives
 
 $$V_m(t) = E_L +
 \left [ V_0 - E_L \right ]
 \exp{(- t / \tau_m)}$$
+
 Therefore membrane potential dynamics follow an exponential decay function, towards steady state value $E_L$. 
 - Time constant $\tau_m = C_m / G_L$ 
 - $V_0$ is the initial potential
@@ -98,6 +100,7 @@ $$C_m \frac {dV_m} {dt} =
   \bar{G}_{Na} m^3 h ( V_m - E_{Na} ) + 
   \bar{G}_L \cdot (V_m - E_L) +
   I_{app}$$
+  
 2. $$\frac {dn} {dt} = \alpha_n (1 - n) - \beta_n n$$
 3. $$\frac{dm}{dt} = \alpha_m (1 - m) - \beta_m m$$
 4. $$\frac{dh}{dt}= \alpha_h (1 - h) - \beta_h h$$
@@ -129,6 +132,7 @@ $$I_m = C_m \frac{dV_m}{dt} =
 G_L (E_L -V_m) + I_{app} \ ;
 \text{if } V_m > V_{thresh} \ \text{then }
 V_m \mapsto V_{reset}$$
+
 Without the leaky conductance term, membrane potential would perfectly integrate the external current applied. Leaky conductance term leads to exponential decay.
 
 The steady state value for $V_m$ is found when $dV_m/dt = 0$:
@@ -145,11 +149,15 @@ where
 - $I$ = driving current through membrane
 
 Spikes are characterised by their firing time 
-$$t^{(f)} : u(t^{(f)}) = u_{th}$$where $u_{th}$ is a firing threshold.
+
+$$t^{(f)} : u(t^{(f)}) = u_{th}$$
+
+where $u_{th}$ is a firing threshold.
 Immediately after $t^{(f)}$, the potential is reset, following
 
 $$\lim_{t \to t^{(f)} \space ; \space t > t^{(f)}} 
 u(t) = u_r$$
+
 where $u_r$ is the resting potential.
 
 Suppose a spike occurs at $t = t^{(1)}$, where $I(t) = I_0$. The membrane potential at a time after $t^{(1)}$ is given by
