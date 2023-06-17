@@ -4,7 +4,7 @@ External stimuli are encoded in neural activity. The internal representation is 
 
 External stimuli -> Internal Representation -> Mental Operation
 
-We consider spikes the carriers/encoders of information.
+We consider spikes the carriers or encoders of information in neural systems. The question is how do spike times encode information?
 
 ## firing rate coding
 
@@ -14,7 +14,7 @@ Consider firing rate (spike count rate) of a single neuron in the primary visual
 
 ![[firing rate encodes bar orientation in monkey v1.png|400]]
 
-While the neuron encodes the orientation of the bar, via firing rate, firing rate coding is limited in reaction time allowed. That is, if the whole neural system was reading the firing rate of this neuron, by dividing the number of spikes in some time window, that does not leave enough time to react to the stimulus. 
+While the neuron seems to encode the orientation of the bar via firing rate, firing rate coding is limited in reaction time allowed. That is, if the whole neural system was reading out the firing rate of this neuron by averaging the number of spikes across small time windows, that does not leave enough time to react to the stimulus. 
 
 e.g., 
 - a fly reacts to new stimuli and changes direction within 30 - 40 ms.
@@ -53,7 +53,8 @@ Famous idea that neurons which synchronise their spike events encode objects 'be
 
 ## pattern recognition using action potential timing
 
-See (Hopfield, 1993).
+> [!cite]
+> Hopfield (1995) https://doi.org/10.1038/376033a0
 
 Consider a set of stimuli $\{a, b, c \dots\}$ , each one characterised by a list of numbers
 $\{ X_{a,1}, X_{a,2} \dots X_{a,i} \dots \}$ . 
@@ -66,7 +67,7 @@ X_{u,i} \approx \lambda X_{a,i} \space \text{for all $i$}$$
 
 and what is the value of $\lambda$. Notice this form implies scale-invariant recognition of a stimulus' quality, and knowledge of its intensity.
 
-Hopfield proposes encoding neurons with oscillating sub-threshold membrane potential, that spike if information relevant to recognised stimuli needs encoding, driven by additional input current.
+Hopfield proposes encoding neurons via oscillating sub-threshold membrane potential, that spike if information relevant to recognised stimuli needs encoding, driven by additional input current.
 
 Cell potential $u$ of the encoding neuron $j$ is given by
 
@@ -97,7 +98,8 @@ Above only describes one action potential per cycle, though more might occur wit
 
 ## synfire chains
 
-See (Diesmann, 1999).
+> [!cite]
+> Diesmann et al. (1999) https://doi.org/10.1038/990101
 
 Feed forward arrangement allows generating coordinated sequences.
 
