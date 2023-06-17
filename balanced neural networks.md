@@ -6,39 +6,95 @@ Suppose firing rates $v_E$ and $v_I$ in two interacting populations are as follo
 
 Excitatory
 $$\tau_E \frac{dv_E} {dt} =
-- v_E + \bigl[ M_{EE}\cdot v_E + M_{EI}v_I - \gamma_E \bigr] $$
+- v_E + \bigl[ M_{EE}\cdot v_E + M_{EI} \cdot v_I - \gamma_E \bigr] $$
 
 Inhibitory
 $$\tau_I \frac{dv_I} {dt} =
-- v_I + \bigl[ M_{IE}\cdot v_E + M_{II}v_I - \gamma_I \bigr] $$
+- v_I + \bigl[ M_{IE}\cdot v_E + M_{II} \cdot v_I - \gamma_I \bigr] $$
 where
 - $\tau$ is the relevant time constant
 - $M$ is the relevant synaptic weight matrix
 - $\gamma$ is the relevant external input constant
 
-Stability or periodicity in the two firing rates emerges, with varying initial conditions. At the fixed point in the phase plane of $v_E$ vs $v_I$:
+The phase plane of the two firing rates contains a fixed point, i.e. where
 $$ \frac{dv_E}{dt} = 0 $$
 $$\frac{dv_I} {dt} = 0$$
 ![[fixed point in balanced neural networks.png|300]]
 
-We can characterise the nature of this fixed point by finding the Jacobian matrix, at the fixed point.
-Let 
-$$x' = f(x,y) $$
-$$y' = g(x,y) $$
-**Jacobian matrix**:
-$$\Biggl( \matrix{
+## fixed point stability
+
+We can characterise the stability of this fixed point, that is whether small perturbations are increased or dampened, as follows.
+
+> [!note]
+> Described in Ch. 6.3 Strogatz
+
+Let the two populations' firing rates be $x$ and $y$ and their time derivatives be written as:
+$$\dot x = f(x,y) $$
+$$\dot y = g(x,y) $$
+Suppose that $(x^*, y^*)$ is a fixed point, i.e.
+$$ f(x^*, y^*) = 0 $$
+$$ g(x^*, y^*) = 0 $$
+We can write the components of a disturbance from the fixed point as $u$ and $v$ as follows:
+$$ u = x - x^* $$
+$$ v = y - y^* $$
+To find whether such a disturbance grows or decays over time, we find the differential equations of each component.
+$$\dot u = \dot x $$
+- since $x^*$ is a constant
+
+Next, substituting $x$ and $y$ in the definition of $\dot{x}$ we get
+$$\dot{u} = f(u + x^*, v + y^*)$$
+Next, perform a Taylor series expansion.
+$$\dot{u} = f(x^*, y^*) + u \frac{\partial f}{\partial x} + v \frac{\partial f}{\partial y} + O(u^2, v^2, uv)$$
+- where big O term just denotes the quadratic terms in the Taylor expansion. We will ignore these since $u^2$, $v^2$ and $uv$ are extremely small (since $u$ and $v$ are defined to be components of a small perturbation to begin with)
+- partial derivatives are written in short hand but are evaluated at the fixed point $(x^*, y^*)$ (they are numbers not functions)
+
+Next, since $f(x^*, y^*) = 0$ and ignoring the quadratic terms, we get
+$$\dot{u} = u \frac{\partial f}{\partial x} + v \frac{\partial f}{\partial y}$$
+Identically you can find
+$$ \dot{v} = u \frac{\partial g}{\partial x} + v \frac{\partial g}{\partial y}$$
+And so the two components of the disturbance $(u,v)$ actually evolve together depending on the Jacobian matrix at the fixed point $(x^*, y^*)$ of the system.
+$$\Biggl( \matrix{\dot{u} \\ \dot{v}} \Biggr) =
+\Biggl( \matrix{
 	\partial f/ \partial x & \partial f/ \partial y \\
 	\partial g/ \partial x & \partial g/ \partial y
-} \Biggr)$$
-From above, the Jacobian is
+} \Biggr)_{(x^*, y^*)} 
+\Biggl ( \matrix{u \\ v} \Biggr)$$
+We can classify the stability of a disturbance by finding the eigenvalues of the above Jacobian matrix as follows.
+
+> [!note]
+> Described in Ch. 5.2 Strogatz
+
+Consider generally an initial vector $\mathbf{v}$ that evolves with time. Our goal is to classify whether its trajectory shows simple exponential growth or decay (first assuming that it does show one of these).
+
+That is, we seek trajectories $\mathbf{x}(t)$ of the form
+$$\mathbf{x}(t) = e^{\lambda t} \mathbf{v} $$
+- where $\lambda$ is a growth rate
+
+Considering that $\dot{\mathbf{x}}$ has the form $\mathbf{A}\mathbf{x}$, we substitute into $\dot{\mathbf{x}} = \mathbf{A} \mathbf{x}$ to get
+$$\lambda e^{\lambda t} \mathbf{v} = e^{\lambda t} \mathbf{A} \mathbf{v} $$
+simplifying to
+$$\lambda \mathbf{v} = \mathbf{A} \mathbf{v}$$
+which indicates that the desired trajectories exist if the initial $\mathbf{v}$ is an eigenvector of $\mathbf{A}$ with corresponding eigenvalue $\lambda$ (which was our growth rate).
+
+Therefore finding the eigenvalues (there will be two possible solutions for a $2 \times 2$ matrix) of $\mathbf{A}$ allows us to characterise the growth rate of the evolution of $\mathbf{v}$.
+- If the real parts of the eigenvalues are less than zero, trajectory should show exponential decay (dampen).
+- If at least one real part is greater than zero, trajectory should show exponential growth (instability).
+- If the real parts are both zero, trajectory lead to periodicity.
+
+Plugging $\dot{\mathbf{x}} = \mathbf{Ax}$ back into our system of two populations' firing rates
+- $\dot{\mathbf{x}} = (\dot{u} , \dot{v})$
+- $\mathbf{A} = \text{Jacobian at the fixed point}$
+- $\mathbf{x} = (u, v)$
+- $\mathbf{v} = (x^*, y^*)$
+
+From the original definitions of firing rates in the two populations, the Jacobian matrix at the fixed point is
 $$\Biggl( \matrix{
 	(M_{EE} - 1) /\tau_E & M_{EI} /\tau_E \\
 	M_{IE} /\tau_E & (M_{II} - 1) /\tau_I
 } \Biggr)$$
-
-The stability is determined by eigenvalues $\lambda_{1,2}$
-- 1) If $\lambda_{1,2} < 0$, the fixed point is an attraction basin, and rates undergo dampened oscillations, reaching the fixed point.
-- 2) Otherwise both rates settle into periodic oscillations, around the fixed point.
+Shown in the image below:
+- 1) When $Re(\lambda_{1,2}) < 0$, the fixed point is stable and rates undergo dampened oscillations, ultimately reaching the fixed point.
+- 2) When $Re(\lambda _{1,2}) = 0$ both rates settle into periodic oscillations, around the fixed point.
 
 ![[stable vs oscillatory dynamics around fixed point in balanced networks.png|500]]
 

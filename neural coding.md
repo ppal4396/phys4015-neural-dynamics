@@ -62,6 +62,7 @@ $\{ X_{a,1}, X_{a,2} \dots X_{a,i} \dots \}$ .
 An unknown stimulus is presented to the neural system with properties $X_u$.
 
 The neural system might then determine for which, if any, of $\{a, b, c \dots\}$ , does
+
 $$X_u \approx \lambda X_a \quad \text{or} \quad
 X_{u,i} \approx \lambda X_{a,i} \space \text{for all $i$}$$
 
@@ -71,8 +72,8 @@ Hopfield proposes encoding neurons via oscillating sub-threshold membrane potent
 
 Cell potential $u$ of the encoding neuron $j$ is given by
 
-$$u_j (t) - u_{th} / R
-= I_j(t) - I_o - A( 1 - \cos 2 \pi ft )$$
+$$u_j (t) - u_{th} / R = I_j(t) - I_o - A( 1 - \cos 2 \pi ft )$$
+
 where
 - $I_0$ and $A$ are positive constants
 - $f$ is the frequency of localised oscillation
@@ -81,8 +82,9 @@ where
 The time $\tau_j$ each neuron fires, in advance of the maximum subthreshold oscillation, encodes the analogue input current $I_j$. Particularly, $\tau_j(I)$ is a function of the shape of oscillation and input due to stimuli (which may already have been transformed by the neural system).
 
 Hopfield then suggests that an encoding neuron (for a particular stimulus $X_j$), will generate time advances given by
-$$\tau_j \approx \ln (\frac{X_j}{\delta + 1}) \approx
-\ln (\frac{X_j}{\delta}) $$
+
+$$\tau_j \approx \ln (\frac{X_j}{\delta + 1}) \approx \ln (\frac{X_j}{\delta})$$
+
 where 
 - $\delta$ is a constant scaling factor.
 
