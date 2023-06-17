@@ -1,29 +1,27 @@
 # balanced neural networks
 
-A key observation in the dynamics of spiking neural networks, with balanced excitatory and inhibitory nodes, is the emergence of oscillations in population firing rates.
+A key observation in the dynamics of spiking neural networks with balanced excitatory and inhibitory nodes is the emergence of oscillations in population firing rates.
 
 Suppose firing rates $v_E$ and $v_I$ in two interacting populations are as follows.
 
 Excitatory
-$$\tau_E \frac{dv_E} {dt} =
-- v_E + \bigl[ M_{EE}\cdot v_E + M_{EI} \cdot v_I - \gamma_E \bigr] $$
+$$\tau_E \frac{dv_E} {dt} = - v_E + \bigl[ M_{EE}\cdot v_E + M_{EI} \cdot v_I - \gamma_E \bigr]$$
 
 Inhibitory
-$$\tau_I \frac{dv_I} {dt} =
-- v_I + \bigl[ M_{IE}\cdot v_E + M_{II} \cdot v_I - \gamma_I \bigr] $$
+$$\tau_I \frac{dv_I} {dt} = - v_I + \bigl[ M_{IE}\cdot v_E + M_{II} \cdot v_I - \gamma_I \bigr]$$
 where
-- $\tau$ is the relevant time constant
-- $M$ is the relevant synaptic weight matrix
-- $\gamma$ is the relevant external input constant
+- $\tau$ are time constants for each population
+- $M$ are synaptic weight matrices in each direction
+- $\gamma$ are external input constants for each population
 
 The phase plane of the two firing rates contains a fixed point, i.e. where
-$$ \frac{dv_E}{dt} = 0 $$
+$$\frac{dv_E}{dt} = 0$$
 $$\frac{dv_I} {dt} = 0$$
 ![[fixed point in balanced neural networks.png|300]]
 
 ## fixed point stability
 
-We can characterise the stability of this fixed point, that is whether small perturbations are increased or dampened, as follows.
+We can characterise the stability of this fixed point, i.e. whether small perturbations are increased, dampened or lead to periodicity (oscillations) as follows.
 
 > [!note]
 > Described in Ch. 6.3 Strogatz
@@ -32,13 +30,13 @@ Let the two populations' firing rates be $x$ and $y$ and their time derivatives 
 $$\dot x = f(x,y) $$
 $$\dot y = g(x,y) $$
 Suppose that $(x^*, y^*)$ is a fixed point, i.e.
-$$ f(x^*, y^*) = 0 $$
-$$ g(x^*, y^*) = 0 $$
+$$f(x^*, y^*) = 0$$
+$$g(x^*, y^*) = 0$$
 We can write the components of a disturbance from the fixed point as $u$ and $v$ as follows:
-$$ u = x - x^* $$
-$$ v = y - y^* $$
-To find whether such a disturbance grows or decays over time, we find the differential equations of each component.
-$$\dot u = \dot x $$
+$$u = x - x^*$$
+$$v = y - y^*$$
+To describe how such a disturbance evolves, we find the time derivatives of each component, starting with $u$.
+$$\dot u = \dot x$$
 - since $x^*$ is a constant
 
 Next, substituting $x$ and $y$ in the definition of $\dot{x}$ we get
@@ -51,7 +49,7 @@ $$\dot{u} = f(x^*, y^*) + u \frac{\partial f}{\partial x} + v \frac{\partial f}{
 Next, since $f(x^*, y^*) = 0$ and ignoring the quadratic terms, we get
 $$\dot{u} = u \frac{\partial f}{\partial x} + v \frac{\partial f}{\partial y}$$
 Identically you can find
-$$ \dot{v} = u \frac{\partial g}{\partial x} + v \frac{\partial g}{\partial y}$$
+$$\dot{v} = u \frac{\partial g}{\partial x} + v \frac{\partial g}{\partial y}$$
 And so the two components of the disturbance $(u,v)$ actually evolve together depending on the Jacobian matrix at the fixed point $(x^*, y^*)$ of the system.
 $$\Biggl( \matrix{\dot{u} \\ \dot{v}} \Biggr) =
 \Biggl( \matrix{
@@ -59,7 +57,7 @@ $$\Biggl( \matrix{\dot{u} \\ \dot{v}} \Biggr) =
 	\partial g/ \partial x & \partial g/ \partial y
 } \Biggr)_{(x^*, y^*)} 
 \Biggl ( \matrix{u \\ v} \Biggr)$$
-We can classify the stability of a disturbance by finding the eigenvalues of the above Jacobian matrix as follows.
+We can classify the stability of a disturbance by finding the eigenvalues of the above Jacobian matrix due to the following reasoning.
 
 > [!note]
 > Described in Ch. 5.2 Strogatz
@@ -67,19 +65,24 @@ We can classify the stability of a disturbance by finding the eigenvalues of the
 Consider generally an initial vector $\mathbf{v}$ that evolves with time. Our goal is to classify whether its trajectory shows simple exponential growth or decay (first assuming that it does show one of these).
 
 That is, we seek trajectories $\mathbf{x}(t)$ of the form
-$$\mathbf{x}(t) = e^{\lambda t} \mathbf{v} $$
+$$\mathbf{x}(t) = e^{\lambda t} \mathbf{v}$$
 - where $\lambda$ is a growth rate
 
 Considering that $\dot{\mathbf{x}}$ has the form $\mathbf{A}\mathbf{x}$, we substitute into $\dot{\mathbf{x}} = \mathbf{A} \mathbf{x}$ to get
-$$\lambda e^{\lambda t} \mathbf{v} = e^{\lambda t} \mathbf{A} \mathbf{v} $$
+$$\lambda e^{\lambda t} \mathbf{v} = e^{\lambda t} \mathbf{A} \mathbf{v}$$
 simplifying to
 $$\lambda \mathbf{v} = \mathbf{A} \mathbf{v}$$
 which indicates that the desired trajectories exist if the initial $\mathbf{v}$ is an eigenvector of $\mathbf{A}$ with corresponding eigenvalue $\lambda$ (which was our growth rate).
 
+> [!hint] 
+> This kind of makes sense intuitively: 
+> If we apply a linear transformation to the perturbation to get the perturbation's change over time, the fixed point is the eigenvector in this linear transformation. 
+> i.e. the fixed point is the direction of transformation that is invariant apart from scaling (which is the growth rate)
+
 Therefore finding the eigenvalues (there will be two possible solutions for a $2 \times 2$ matrix) of $\mathbf{A}$ allows us to characterise the growth rate of the evolution of $\mathbf{v}$.
 - If the real parts of the eigenvalues are less than zero, trajectory should show exponential decay (dampen).
 - If at least one real part is greater than zero, trajectory should show exponential growth (instability).
-- If the real parts are both zero, trajectory lead to periodicity.
+- If the real parts are both zero, trajectory leads to periodicity.
 
 Plugging $\dot{\mathbf{x}} = \mathbf{Ax}$ back into our system of two populations' firing rates
 - $\dot{\mathbf{x}} = (\dot{u} , \dot{v})$
@@ -98,11 +101,14 @@ Shown in the image below:
 
 ![[stable vs oscillatory dynamics around fixed point in balanced networks.png|500]]
 
+Ultimately, this shows that whether or not the two population rates oscillate depends on the synaptic weight matrices in each direction. This is where the notion of balance comes from.
+
 ## chaos in balanced networks
 
-See (van Vreeswijk and Sompolinsky, 1996).
+> [!cite] 
+> van Vreeswijk and Sompolinsky (1996) https://doi.org/10.1126/science.274.5293.1724
 
-This model generates irregular firing patterns in two balanced populations.
+Contrary to oscillations, this model generates irregular firing patterns in two balanced populations.
 
 We have
 - $N_E$ excitatory neurons
@@ -112,8 +118,8 @@ We have
 **Architecture**:
 ![[architecture of balanced neural networks generating chaos.png|200]]
 where
-- $J$ is the relevant synaptic weight matrix, between populations.
-- $E$ is the relevant input synaptic weight vector.
+- $J$ are the synaptic weight matrices between populations.
+- $E$ are the input synaptic weight vectors.
 
 The connectivity is random and sparse, such that
 $$ K << N_E, N_I $$
@@ -122,28 +128,26 @@ where there are on average $K$ excitatory, $K$ inhibitory, $K$ external connecti
 State of neuron is described by $\sigma = \{0, 1\}$
 $$\sigma_k^i = \Theta \bigl( u_k^i (t) \bigr) $$
 - where $\Theta$ is Heaviside function (sets non-positive values to 0, positive values to 1)
-Total synaptic input to neuron at time $t$ is
-$$ u_k^i(t) = \sum_{l=1}^2 \sum_{j=1}^{N_l} 
+- $u_k^i(t)$ is the total synaptic input to neuron $i$ in population $k$ at time $t$ as follows
+$$u_k^i(t) = \sum_{l=1}^2 \sum_{j=1}^{N_l} 
 J_{kl}^{ij} \sigma_l^j (t) +
 u_k^0 - \theta_k$$
-- where $\theta_k$ is neuron's firing threshold
+- where $\theta_k$ represents the neuron's firing threshold
+- $u_k^0$ represents the constant external input to each neuron and is on the order $K$
 
-Since individual connections are strong, only $\sqrt{K}$ excitatory inputs to a neuron are needed to cross its threshold. 
+Next assume individual connections are strong such that only $\sqrt{K}$ excitatory inputs to a neuron are needed to cross its threshold. 
 
 Deterministic chaos arises in spike times as follows
 - total synaptic input to a cell is overwhelmingly excitatory or inhibitory
-	- unless excitatory + inhibitory populations dynamically adjust to cancel eachother
-	- this balance emerges, and does not require precise tuning
+- until excitatory + inhibitory population rates dynamically adjust to cancel each other
+- this adjustment of rates to maintain balance of excitatory/inhibitory input emerges when connectivity follows above assumptions and does not require precise tuning of weights
 - at balance, synaptic input's mean and fluctuations are on the order of the threshold.
-	- crossing the threshold is determined by fluctuations
-	- leading to deterministic chaos
+- crossing the threshold is determined by fluctuations, leading to deterministic chaos in spike times.
 
-Although single neuron dynamics are non-linear, population activity increases linearly with external input.
-
-This allows the balanced network to quickly track rates of change in external input.
+Although the single neuron dynamics are non-linear, whole network population activity still increases linearly with external input activity. This allows the balanced network as a whole to quickly track the change in rate of external input.
 - possible encoding mechanism
 
-Note however, that fluctuations in synaptic input are observed to be very large ('synaptic background noise') in the cortex, unlike in the above model.
+Note however that, in the cortex, fluctuations in synaptic input are observed to be very large relative to the mean input ('synaptic background noise') unlike in the above model.
 
 ## varying states in balanced networks
 
