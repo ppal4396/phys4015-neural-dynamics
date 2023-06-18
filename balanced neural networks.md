@@ -1,25 +1,31 @@
 # balanced neural networks
 
-A key observation in the dynamics of spiking neural networks with balanced excitatory and inhibitory nodes is the emergence of oscillations in population firing rates.
+## oscillations in population activity
+
+A key observation in the dynamics of spiking neural networks with balanced excitatory and inhibitory nodes is the emergence of oscillations in each population's firing rates.
 
 Suppose firing rates $v_E$ and $v_I$ in two interacting populations are as follows.
 
-Excitatory
+Excitatory population
 $$\tau_E \frac{dv_E} {dt} = - v_E + \bigl[ M_{EE}\cdot v_E + M_{EI} \cdot v_I - \gamma_E \bigr]$$
 
-Inhibitory
+Inhibitory population
 $$\tau_I \frac{dv_I} {dt} = - v_I + \bigl[ M_{IE}\cdot v_E + M_{II} \cdot v_I - \gamma_I \bigr]$$
 where
 - $\tau$ are time constants for each population
 - $M$ are synaptic weight matrices in each direction
 - $\gamma$ are external input constants for each population
 
-The phase plane of the two firing rates contains a fixed point, i.e. where
-$$\frac{dv_E}{dt} = 0$$
-$$\frac{dv_I} {dt} = 0$$
+Assuming $\tau$, $M$ and $\gamma$ are all held constant, you can see that the phase plane of the two firing rates contains a fixed point i.e. where
+$$\frac{dv_E}{dt} = 0,$$
+$$\frac{dv_I} {dt} = 0,$$
+the system will be at equilibrium and will undergo no further change.
+
 ![[fixed point in balanced neural networks.png|300]]
 
-## fixed point stability
+Analysis of stability at the fixed point explains the emergence of oscillations under balanced excitatory-inhibitory connectivity.
+
+### fixed point stability
 
 We can characterise the stability of this fixed point, i.e. whether small perturbations are increased, dampened or lead to periodicity (oscillations) as follows.
 
@@ -74,11 +80,6 @@ simplifying to
 $$\lambda \mathbf{v} = \mathbf{A} \mathbf{v}$$
 which indicates that the desired trajectories exist if the initial $\mathbf{v}$ is an eigenvector of $\mathbf{A}$ with corresponding eigenvalue $\lambda$ (which was our growth rate).
 
-> [!hint] 
-> This kind of makes sense intuitively: 
-> If we apply a linear transformation to the perturbation to get the perturbation's change over time, the fixed point is the eigenvector in this linear transformation. 
-> i.e. the fixed point is the direction of transformation that is invariant apart from scaling (which is the growth rate)
-
 Therefore finding the eigenvalues (there will be two possible solutions for a $2 \times 2$ matrix) of $\mathbf{A}$ allows us to characterise the growth rate of the evolution of $\mathbf{v}$.
 - If the real parts of the eigenvalues are less than zero, trajectory should show exponential decay (dampen).
 - If at least one real part is greater than zero, trajectory should show exponential growth (instability).
@@ -89,6 +90,13 @@ Plugging $\dot{\mathbf{x}} = \mathbf{Ax}$ back into our system of two population
 - $\mathbf{A} = \text{Jacobian at the fixed point}$
 - $\mathbf{x} = (u, v)$
 - $\mathbf{v} = (x^*, y^*)$
+
+Since $\mathbf{A}$ is a Jacobian at the fixed point, the initial vector/fixed point is indeed an eigenvector in this transformation (see [[balanced neural networks#^a7d991|below]]), and the eigenvalues of the Jacobian will yield the growth rate of small perturbations to the fixed point.
+
+> [!hint] 
+> This kind of makes sense intuitively: 
+> If we apply a linear transformation to the perturbation to get the perturbation's change over time, the fixed point is the eigenvector under this linear transformation. 
+> i.e. the fixed point is the direction that remains unchanged by the transformation apart from scaling (which is the growth rate)
 
 From the original definitions of firing rates in the two populations, the Jacobian matrix at the fixed point is
 $$\Biggl( \matrix{
@@ -101,7 +109,11 @@ Shown in the image below:
 
 ![[stable vs oscillatory dynamics around fixed point in balanced networks.png|500]]
 
-Ultimately, this shows that whether or not the two population rates oscillate depends on the synaptic weight matrices in each direction. This is where the notion of balance comes from.
+Ultimately, this shows that whether or not the two population rates oscillate after perturbation to their equilibrium state depends on the synaptic weight matrices in each direction. This is where the notion that excitatory-inhibitory balance leads to oscillatory behaviour comes from.
+
+> [!note] Why $(x^*, y^*)$ is an eigenvector of $\mathbf{J}$ at $(x^*, y^*)$
+> I can't work this out.
+^a7d991
 
 ## chaos in balanced networks
 
