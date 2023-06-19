@@ -49,7 +49,7 @@ Next, substituting $x$ and $y$ in the definition of $\dot{x}$ we get
 $$\dot{u} = f(u + x^*, v + y^*)$$
 Next, perform a Taylor series expansion.
 $$\dot{u} = f(x^*, y^*) + u \frac{\partial f}{\partial x} + v \frac{\partial f}{\partial y} + O(u^2, v^2, uv)$$
-- where big O term just denotes the quadratic terms in the Taylor expansion. We will ignore these since $u^2$, $v^2$ and $uv$ are extremely small (since $u$ and $v$ are defined to be components of a small perturbation to begin with)
+- where big O term just denotes the quadratic (and higher order) terms in the Taylor expansion. We will ignore these since $u^2$, $v^2$ and $uv$ are extremely small (since $u$ and $v$ are defined to be components of a small perturbation to begin with)
 - partial derivatives are written in short hand but are evaluated at the fixed point $(x^*, y^*)$ (they are numbers not functions)
 
 Next, since $f(x^*, y^*) = 0$ and ignoring the quadratic terms, we get
@@ -91,12 +91,12 @@ Plugging $\dot{\mathbf{x}} = \mathbf{Ax}$ back into our system of two population
 - $\mathbf{x} = (u, v)$
 - $\mathbf{v} = (x^*, y^*)$
 
-Since $\mathbf{A}$ is a Jacobian at the fixed point, the initial vector/fixed point is indeed an eigenvector in this transformation (see [[balanced neural networks#^a7d991|below]]), and the eigenvalues of the Jacobian will yield the growth rate of small perturbations to the fixed point.
+Since in our case $\mathbf{A}$ is a transformation at the fixed point that approximates $\mathbf{\dot{x}}$, we can describe *stability* i.e. behaviours of trajectories towards the fixed point by assuming $(x^*, y^*)$ is indeed an eigenvector in this transformation such that the eigenvalues of the Jacobian will yield the growth rate of small perturbations to the fixed point (see more [[balanced neural networks#^a7d991|below]]).
 
 > [!hint] 
 > This kind of makes sense intuitively: 
-> If we apply a linear transformation to the perturbation to get the perturbation's change over time, the fixed point is the eigenvector under this linear transformation. 
-> i.e. the fixed point is the direction that remains unchanged by the transformation apart from scaling (which is the growth rate)
+> If we apply a linear transformation to the perturbation to get the perturbation's change over time, we want to characterise the fixed point as the eigenvector under this linear transformation. 
+> i.e. imagining the fixed point as the direction that remains unchanged by the transformation apart from scaling (which is the growth rate)
 
 From the original definitions of firing rates in the two populations, the Jacobian matrix at the fixed point is
 $$\Biggl( \matrix{
@@ -111,8 +111,10 @@ Shown in the image below:
 
 Ultimately, this shows that whether or not the two population rates oscillate after perturbation to their equilibrium state depends on the synaptic weight matrices in each direction. This is where the notion that excitatory-inhibitory balance leads to oscillatory behaviour comes from.
 
-> [!note] Why $(x^*, y^*)$ is an eigenvector of $\mathbf{J}$ at $(x^*, y^*)$
-> I can't work this out.
+> [!note] Why we find the eigenvalues of $J$
+> $J$ transforms perturbations to the fixed point at small time scales. i.e. the $J$ transformation approximates
+> $$\frac{d}{dt}\Biggl ( \matrix{{u} \\ {v}} \Biggr) \ \text{at} \ (x^*, y^*)$$
+> We find eigenvalues $\lambda_{1,2}$ of $J$ since if $(x^*, y^*)$ was an eigenvector under this transformation, then $\lambda_{1,2}$ tells us whether the trajectory towards $(x^*, y^*)$  grows or decays.
 ^a7d991
 
 ## chaos in balanced networks
